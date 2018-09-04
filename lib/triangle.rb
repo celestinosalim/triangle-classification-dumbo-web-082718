@@ -13,32 +13,28 @@ end
 
 
 def kind
-  valid_triangle
-  if @x == @y  && @x == @z
-    return  :equilateral
+  if valid_triangle
+    if @x == @y  && @x == @z
+      return  :equilateral
 
-  elsif @x == @y || @y == @z || @x == @z
-    return :isosceles
+    elsif @x == @y || @y == @z || @x == @z
+      return :isosceles
 
-  elsif @x != @y || @y != @z || @x != @z
-    return :scalene
-else
+    else
 
+    return :scalene   # elsif @x != @y || @y != @z || @x != @z
+                      #   return :scalene
+
+      end
+    else
+      raise TriangleError
     end
-end
+  end
+
 
 def valid_triangle
-  triangle = [(x + y > z ), (x + z > y), (y + z > x)]
-  sides = [x, y, z]
-    sides.each do |side|
-      triangle << false if side < 0
-    end
-    if triangle.include?(false)
-      begin
-        raise TriangleError
-      end
-    end
- end
+  triangle = (x + y > z ) && (x + z > y) && (y + z > x) && (x > 0) && (y > 0) && (z > 0)
+end
 
 
 # The sum of the lengths of any two sides of a triangle always exceeds the length of the third side. This is a principle known as the triangle inequality.
@@ -50,7 +46,6 @@ class TriangleError < StandardError
 
 end #triangle end
 
-# [@x, @y, @z]
 
 
 

@@ -31,7 +31,8 @@ def valid_triangle
   triangle = [(x + y > z ), (x + z > y), (y + z > x)]
   sides = [x, y, z]
     sides.each do |side|
-      triangle << false if side < 0
+       if side < 0
+         triangle = false
     end
     if triangle.include?(false)
       begin
